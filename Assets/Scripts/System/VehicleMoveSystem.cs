@@ -1,6 +1,7 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace System
 {
@@ -15,13 +16,18 @@ namespace System
                 float3 currentPos = transform.ValueRO.Position;
                 float3 targetPos = vehicle.ValueRO.TargetPosition;
 
-                float3 direction =
-                    math.normalize(targetPos - currentPos);
+                float3 direction = math.normalize(targetPos - currentPos);
+                quaternion q = Quaternion.LookRotation(targetPos - currentPos);
 
                 if (math.distance(currentPos, targetPos) > 0.1f)
                 {
                     transform.ValueRW.Position +=
-                        direction * vehicle.ValueRO.MaxSpeed * deltaTime;
+                        direction * vehicle.ValueRO.MoveSpeed * deltaTime;
+                    transform.ValueRW.Rotation = 
+                        Quaternion.Lerp(
+                            transform.ValueRW.Rotation, 
+                            q, 
+                            vehicle.ValueRO.RotateSpeed * deltaTime);
                 }
             }
         }

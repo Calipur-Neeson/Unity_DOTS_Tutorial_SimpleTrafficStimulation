@@ -7,13 +7,13 @@ public class VehicleAuthoring : MonoBehaviour
     public Transform target;
     private class Baker : Baker<VehicleAuthoring>
     {
-        
         public override void Bake(VehicleAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new VehicleData
             {
-                MaxSpeed = Random.Range(5,10),
+                MoveSpeed = Random.Range(5,10),
+                RotateSpeed = 2f,
                 TargetPosition = authoring.target.position,
             });
         }
