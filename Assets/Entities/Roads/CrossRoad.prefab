@@ -71,6 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9038965033347662715}
+  - component: {fileID: 4584605028591529962}
   m_Layer: 0
   m_Name: Lane13
   m_TagString: Untagged
@@ -100,6 +101,27 @@ Transform:
   - {fileID: 4342693347461627260}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4584605028591529962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301522541310128214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 8418974474058561495}
+  - {fileID: 4997226645274794395}
+  - {fileID: 3945106710749963947}
+  - {fileID: 2868924122598976165}
+  - {fileID: 9095852295523021464}
+  - {fileID: 7753723020002310936}
+  - {fileID: 4342693347461627260}
+  NextLane: {fileID: 0}
 --- !u!1 &355686355547040401
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1369238169794220253}
+  - component: {fileID: 5376450671763498158}
   m_Layer: 0
   m_Name: Lane14
   m_TagString: Untagged
@@ -448,6 +471,27 @@ Transform:
   - {fileID: 2490298301652087999}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5376450671763498158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492742495570682648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 2329143265567588570}
+  - {fileID: 467972750057873977}
+  - {fileID: 4721071588837207419}
+  - {fileID: 6850694986683076391}
+  - {fileID: 1153183568274467080}
+  - {fileID: 8270991950684588387}
+  - {fileID: 2490298301652087999}
+  NextLane: {fileID: 0}
 --- !u!1 &1520121037451000539
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4264931528340844948}
+  - component: {fileID: 7542448872051358860}
   m_Layer: 0
   m_Name: Lane10
   m_TagString: Untagged
@@ -543,6 +588,22 @@ Transform:
   - {fileID: 7333488563217207948}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7542448872051358860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880827735521148322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 6191783807472380841}
+  - {fileID: 7333488563217207948}
+  NextLane: {fileID: 0}
 --- !u!1 &1921412721964083141
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +613,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1975721305654753858}
+  - component: {fileID: 1770682955516201429}
   m_Layer: 0
   m_Name: Lane6
   m_TagString: Untagged
@@ -581,6 +643,27 @@ Transform:
   - {fileID: 1037878021864492838}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1770682955516201429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921412721964083141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 2847965833637762446}
+  - {fileID: 4823347343411954924}
+  - {fileID: 2813344902797517281}
+  - {fileID: 9107502642148624034}
+  - {fileID: 3201121425715953536}
+  - {fileID: 2390794190906751484}
+  - {fileID: 1037878021864492838}
+  NextLane: {fileID: 0}
 --- !u!1 &1941551101675406002
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,6 +704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8706758017506930425}
+  - component: {fileID: 3123725901692600281}
   m_Layer: 0
   m_Name: Lane9
   m_TagString: Untagged
@@ -645,6 +729,22 @@ Transform:
   - {fileID: 7292367339903483287}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3123725901692600281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031364519916752940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 8382114380593092555}
+  - {fileID: 7292367339903483287}
+  NextLane: {fileID: 0}
 --- !u!1 &2039769149253825756
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,6 +776,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7443730064357141832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2044525263713733018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4385717950094277064}
+  m_Layer: 0
+  m_Name: Connector3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4385717950094277064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044525263713733018}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1796248097619700004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2051236255547294996
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +816,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7443730064357141832}
+  - component: {fileID: 2901702188434951845}
   m_Layer: 0
   m_Name: Lane4
   m_TagString: Untagged
@@ -714,6 +846,27 @@ Transform:
   - {fileID: 7902500239998340978}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2901702188434951845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051236255547294996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 8390237316728611529}
+  - {fileID: 3763648948985349411}
+  - {fileID: 4103012967510912238}
+  - {fileID: 2207002350278983575}
+  - {fileID: 8497200540380512242}
+  - {fileID: 1905926834212886088}
+  - {fileID: 7902500239998340978}
+  NextLane: {fileID: 0}
 --- !u!1 &2059672508448065328
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,6 +938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 662960720105768792}
+  - component: {fileID: 1667880754309557788}
   m_Layer: 0
   m_Name: 'Lane1 '
   m_TagString: Untagged
@@ -809,6 +963,22 @@ Transform:
   - {fileID: 1158403241087891961}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1667880754309557788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2151699301824898381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 8129495390429894265}
+  - {fileID: 1158403241087891961}
+  NextLane: {fileID: 0}
 --- !u!1 &2236908249180089368
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,6 +1081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1735425817077785052}
+  - component: {fileID: 6687917911246206830}
   m_Layer: 0
   m_Name: Lane2
   m_TagString: Untagged
@@ -935,6 +1106,22 @@ Transform:
   - {fileID: 8679192443165320872}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6687917911246206830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2368076920307920107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 7022869372640926671}
+  - {fileID: 8679192443165320872}
+  NextLane: {fileID: 0}
 --- !u!1 &2410815860722718685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,6 +1379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9061052234144134656}
+  - component: {fileID: 19222837811746221}
   m_Layer: 0
   m_Name: Lane8
   m_TagString: Untagged
@@ -1214,6 +1402,53 @@ Transform:
   m_Children:
   - {fileID: 7113497694729230743}
   - {fileID: 7212194981362080235}
+  m_Father: {fileID: 1796248097619700004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &19222837811746221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3204943319034721173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 7113497694729230743}
+  - {fileID: 7212194981362080235}
+  NextLane: {fileID: 0}
+--- !u!1 &3215723543983740416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4087922620236607719}
+  m_Layer: 0
+  m_Name: Connector4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4087922620236607719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3215723543983740416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -30, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3561522795246103880
@@ -1349,6 +1584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8717014332339624377}
+  - component: {fileID: 8476520551490225737}
   m_Layer: 0
   m_Name: Lane16
   m_TagString: Untagged
@@ -1373,6 +1609,22 @@ Transform:
   - {fileID: 1602413967405537478}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8476520551490225737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4461918875801550028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 3459508658543081763}
+  - {fileID: 1602413967405537478}
+  NextLane: {fileID: 0}
 --- !u!1 &4663745830953002260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,6 +1903,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1369238169794220253}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5679712527686532962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8682380783308840269}
+  m_Layer: 0
+  m_Name: Connector2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8682380783308840269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5679712527686532962}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -30, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5784506373065357624
 GameObject:
@@ -1971,6 +2254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4858276446628014322}
+  - component: {fileID: 2984448760692273960}
   m_Layer: 0
   m_Name: Lane12
   m_TagString: Untagged
@@ -2000,6 +2284,27 @@ Transform:
   - {fileID: 2364498006459444208}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2984448760692273960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6486921252661296019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 3807970643453763598}
+  - {fileID: 7312967312453451959}
+  - {fileID: 5507639956307747102}
+  - {fileID: 7240985392701376537}
+  - {fileID: 2435628636359115191}
+  - {fileID: 6066620032298908686}
+  - {fileID: 2364498006459444208}
+  NextLane: {fileID: 0}
 --- !u!1 &6504505024964838980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,6 +2314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2941631635889978976}
+  - component: {fileID: 7056910543508837630}
   m_Layer: 0
   m_Name: Lane7
   m_TagString: Untagged
@@ -2033,6 +2339,22 @@ Transform:
   - {fileID: 1050864371040256321}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7056910543508837630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6504505024964838980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 6828263221333757566}
+  - {fileID: 1050864371040256321}
+  NextLane: {fileID: 0}
 --- !u!1 &6545138721085847673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2104,6 +2426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5544060337198285491}
+  - component: {fileID: 5405139838297927723}
   m_Layer: 0
   m_Name: Lane5
   m_TagString: Untagged
@@ -2133,6 +2456,27 @@ Transform:
   - {fileID: 2119006611741709291}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5405139838297927723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824011936523148140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 6252826277495196911}
+  - {fileID: 8640139785654954108}
+  - {fileID: 6637154136574658162}
+  - {fileID: 4045745683269738147}
+  - {fileID: 7748056708256584339}
+  - {fileID: 3026393067592975379}
+  - {fileID: 2119006611741709291}
+  NextLane: {fileID: 0}
 --- !u!1 &6864131226122975555
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,6 +2734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5274540230735770929}
+  - component: {fileID: 4309498576309327667}
   m_Layer: 0
   m_Name: Lane15
   m_TagString: Untagged
@@ -2414,6 +2759,22 @@ Transform:
   - {fileID: 8379097112410178524}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4309498576309327667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7359559878713363188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 3913450343083204383}
+  - {fileID: 8379097112410178524}
+  NextLane: {fileID: 0}
 --- !u!1 &7608185979213657867
 GameObject:
   m_ObjectHideFlags: 0
@@ -2578,6 +2939,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 623752431134559955}
+  - component: {fileID: 4708056745707389586}
   m_Layer: 0
   m_Name: Lane3
   m_TagString: Untagged
@@ -2607,6 +2969,27 @@ Transform:
   - {fileID: 8297844374280967203}
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4708056745707389586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8246881706645909076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 1413890193921775701}
+  - {fileID: 2539470642167015450}
+  - {fileID: 5176536290052232588}
+  - {fileID: 8592650677283313181}
+  - {fileID: 6240419789900846412}
+  - {fileID: 7144543548007877725}
+  - {fileID: 8297844374280967203}
+  NextLane: {fileID: 0}
 --- !u!1 &8319945663078787963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,6 +3092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4731797389046130156}
+  - component: {fileID: 9022015404243253117}
   m_Layer: 0
   m_Name: Lane11
   m_TagString: Untagged
@@ -2736,6 +3120,58 @@ Transform:
   - {fileID: 7421010410271420139}
   - {fileID: 2324719299803201143}
   - {fileID: 5800828685981192853}
+  m_Father: {fileID: 1796248097619700004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9022015404243253117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8619245386032415533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f252c0c4b8cd41c44b4b78ca889ae2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  Waypoints:
+  - {fileID: 2851707699325375568}
+  - {fileID: 5358886614201806964}
+  - {fileID: 635206861560070072}
+  - {fileID: 3487271065182732101}
+  - {fileID: 7421010410271420139}
+  - {fileID: 2324719299803201143}
+  - {fileID: 5800828685981192853}
+  NextLane: {fileID: 0}
+--- !u!1 &8692555392251944755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8351341136338502972}
+  m_Layer: 0
+  m_Name: Connector1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8351341136338502972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692555392251944755}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 1796248097619700004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8916465298471443341
@@ -2850,7 +3286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
       propertyPath: m_Name
-      value: Road04
+      value: CrossRoad
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2903,8 +3339,63 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8717014332339624377}
-    m_AddedComponents: []
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8351341136338502972}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8682380783308840269}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4385717950094277064}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4087922620236607719}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5462092357739864965}
   m_SourcePrefab: {fileID: 100100000, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
+--- !u!1 &1415923088807670686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
+  m_PrefabInstance: {fileID: 2262838213664739023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5462092357739864965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415923088807670686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b32e917e35bd5a4197067f16e163405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Road
+  Connectors:
+  - {fileID: 8351341136338502972}
+  - {fileID: 8682380783308840269}
+  - {fileID: 4385717950094277064}
+  - {fileID: 4087922620236607719}
+  AdjacentRoads: []
+  Lanes:
+  - {fileID: 1667880754309557788}
+  - {fileID: 6687917911246206830}
+  - {fileID: 4708056745707389586}
+  - {fileID: 2901702188434951845}
+  - {fileID: 5405139838297927723}
+  - {fileID: 1770682955516201429}
+  - {fileID: 7056910543508837630}
+  - {fileID: 19222837811746221}
+  - {fileID: 3123725901692600281}
+  - {fileID: 7542448872051358860}
+  - {fileID: 9022015404243253117}
+  - {fileID: 2984448760692273960}
+  - {fileID: 4584605028591529962}
+  - {fileID: 5376450671763498158}
+  - {fileID: 4309498576309327667}
+  - {fileID: 8476520551490225737}
 --- !u!4 &1796248097619700004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56ddbc3506fbaba4e90eb5779d7b1e03, type: 3}
