@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Entities;
 
 public class Lane : MonoBehaviour
 {
@@ -7,9 +8,7 @@ public class Lane : MonoBehaviour
     
     [Header("Next Lane")]
     public Lane NextLane;
-
     
-    private Road[] _roads;
     private void OnValidate()
     {
         Waypoints = new Transform[transform.childCount];
@@ -18,5 +17,38 @@ public class Lane : MonoBehaviour
             Waypoints[i] = transform.GetChild(i);
         }
     }
+}
 
+public class LaneBaker : Baker<Lane>
+{
+    public override void Bake(Lane authoring)
+    {
+        Entity laneEntity = GetEntity(TransformUsageFlags.None);
+
+        AddComponent<LaneData>(laneEntity);
+
+        DynamicBuffer<WaypointBuffer> buffer =
+            AddBuffer<WaypointBuffer>(laneEntity);
+
+        foreach (var waypoint in authoring.Waypoints)
+        {
+            buffer.Add(new WaypointBuffer
+            {
+                Destination = waypoint.position
+            });
+        }
+
+        if (authoring.NextLane != null)
+        {
+            Entity nextLaneEntity =
+                GetEntity(authoring.NextLane,
+                    TransformUsageFlags.None);
+
+            SetComponent(laneEntity,
+                new LaneData
+                {
+                    NextLane = nextLaneEntity
+                });
+        }
+    }
 }
