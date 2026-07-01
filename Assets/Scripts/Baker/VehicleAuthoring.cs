@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class VehicleAuthoring : MonoBehaviour
 {
-    public Transform[] target;
+    public Lane startLane;
     private class Baker : Baker<VehicleAuthoring>
     {
         public override void Bake(VehicleAuthoring authoring)
@@ -14,23 +14,12 @@ public class VehicleAuthoring : MonoBehaviour
             {
                 MoveSpeed = Random.Range(5,10),
                 RotateSpeed = 2f,
-                TargetPosition = authoring.target[0].position
-            });
-            
-            AddComponent(entity, new WaypointIndexData
-            {
-                Index = 0
-            });
+                CurrentLane =
+                    GetEntity(authoring.startLane,
+                        TransformUsageFlags.None),
 
-            var buffer = AddBuffer<WaypointBuffer>(entity);
-
-            foreach (var point in authoring.target)
-            {
-                buffer.Add(new WaypointBuffer
-                {
-                    Destination = point.position
-                });
-            }
+                CurrentIndex = 1
+            });
         }
     }
 }

@@ -12,45 +12,43 @@ namespace System
             var deltaTime = SystemAPI.Time.DeltaTime;
             foreach (var (
                          transform, 
-                         vehicle,
-                         index,
-                         waypoints) 
+                         vehicle) 
                      in SystemAPI.Query<
                          RefRW<LocalTransform>,
-                         RefRW<VehicleData>,
-                         RefRW<WaypointIndexData>,
-                         DynamicBuffer<WaypointBuffer>>())
+                         RefRW<VehicleData>>())
             {
+                Entity laneEntity = vehicle.ValueRO.CurrentLane;
+                RefRO<LaneData> laneData = SystemAPI.GetComponentRO<LaneData>(laneEntity);
+                DynamicBuffer<WaypointBuffer> waypoints =
+                    SystemAPI.GetBuffer<WaypointBuffer>(laneEntity);
+                
+                float3 targetPos = waypoints[vehicle.ValueRO.CurrentIndex].Destination;
                 float3 currentPos = transform.ValueRO.Position;
-                float3 targetPos = vehicle.ValueRO.TargetPosition;
+
                 
                 if (math.distance(currentPos, targetPos) < 0.1f)
                 {
-                    index.ValueRW.Index++;
-
-                    if (index.ValueRW.Index < waypoints.Length)
+                    vehicle.ValueRW.CurrentIndex++;
+                    if (vehicle.ValueRO.CurrentIndex >= waypoints.Length)
                     {
-                        vehicle.ValueRW.TargetPosition = waypoints[index.ValueRW.Index].Destination;
-                    }
-                    else
-                    {
-                        index.ValueRW.IsFinished = true;
+                        if (laneData.ValueRO.NextLane == Entity.Null)
+                            return;
+                                                                       
+                        vehicle.ValueRW.CurrentLane = laneData.ValueRO.NextLane;
+                        vehicle.ValueRW.CurrentIndex = 1;
                     }
                 }
-
-                if (!index.ValueRW.IsFinished)
-                {
-                    float3 direction = math.normalize(targetPos - currentPos);
-                    quaternion q = Quaternion.LookRotation(targetPos - currentPos);
-                    
-                    transform.ValueRW.Position +=
-                        direction * vehicle.ValueRO.MoveSpeed * deltaTime;
-                    transform.ValueRW.Rotation =
-                        Quaternion.Lerp(
-                            transform.ValueRW.Rotation,
-                            q,
-                            vehicle.ValueRO.RotateSpeed * deltaTime);
-                }
+                
+                float3 direction = math.normalize(targetPos - currentPos);
+                quaternion q = Quaternion.LookRotation(targetPos - currentPos);
+                
+                transform.ValueRW.Position +=
+                    direction * vehicle.ValueRO.MoveSpeed * deltaTime;
+                transform.ValueRW.Rotation =
+                    Quaternion.Lerp(
+                        transform.ValueRW.Rotation,
+                        q,
+                        vehicle.ValueRO.RotateSpeed * deltaTime);
             }
         }
     }
