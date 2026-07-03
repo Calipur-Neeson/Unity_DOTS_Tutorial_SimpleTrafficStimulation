@@ -14,9 +14,7 @@ public class VehicleAuthoring : MonoBehaviour
             {
                 MoveSpeed = Random.Range(5,10),
                 RotateSpeed = 2f,
-                CurrentLane =
-                    GetEntity(authoring.startLane,
-                        TransformUsageFlags.None),
+                CurrentLane = Entity.Null,
 
                 CurrentIndex = 1
             });
