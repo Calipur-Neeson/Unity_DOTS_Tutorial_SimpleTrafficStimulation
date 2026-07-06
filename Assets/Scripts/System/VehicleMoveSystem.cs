@@ -3,8 +3,6 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-namespace System
-{
     public partial struct VehicleMoveSystem: ISystem
     {
         public void OnUpdate(ref SystemState state)
@@ -26,6 +24,17 @@ namespace System
                 float3 currentPos = transform.ValueRO.Position;
 
                 
+                float3 direction = math.normalize(targetPos - currentPos);
+                quaternion q = quaternion.LookRotationSafe(direction, math.up());
+                
+                transform.ValueRW.Position +=
+                    direction * vehicle.ValueRO.MoveSpeed * deltaTime;
+                transform.ValueRW.Rotation =
+                    Quaternion.Lerp(
+                        transform.ValueRW.Rotation,
+                        q,
+                        vehicle.ValueRO.RotateSpeed * deltaTime);
+                
                 if (math.distance(currentPos, targetPos) < 0.1f)
                 {
                     vehicle.ValueRW.CurrentIndex++;
@@ -38,18 +47,6 @@ namespace System
                         vehicle.ValueRW.CurrentIndex = 1;
                     }
                 }
-                
-                float3 direction = math.normalize(targetPos - currentPos);
-                quaternion q = Quaternion.LookRotation(targetPos - currentPos);
-                
-                transform.ValueRW.Position +=
-                    direction * vehicle.ValueRO.MoveSpeed * deltaTime;
-                transform.ValueRW.Rotation =
-                    Quaternion.Lerp(
-                        transform.ValueRW.Rotation,
-                        q,
-                        vehicle.ValueRO.RotateSpeed * deltaTime);
             }
         }
     }
-}
