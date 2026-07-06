@@ -9,17 +9,19 @@ public partial struct VehicleSpawnSystem : ISystem
     {
         RefRW<Spawner> spawner = SystemAPI.GetSingletonRW<Spawner>();
 
-        if (spawner.ValueRO.Count == 0)
+        if (spawner.ValueRO.RemainCount == 0)
             return;
 
+        // Get All lanes
         EntityQuery laneQuery =
             state.EntityManager.CreateEntityQuery(typeof(LaneData));
-
         NativeArray<Entity> lanes = laneQuery.ToEntityArray(Allocator.Temp);
         
-        for (int i = 0; i < spawner.ValueRO.Count; i++)
+        int spawnCount = math.min(spawner.ValueRO.RemainCount, spawner.ValueRO.SpawnPerFrame);
+        for (int i = 0; i < spawnCount; i++)
         {
-            Entity lane = lanes[i % lanes.Length];
+            Random random = new Unity.Mathematics.Random((uint)UnityEngine.Random.Range(0, int.MaxValue));
+            Entity lane = lanes[random.NextInt(lanes.Length)];
             
             Entity vehicle = state.EntityManager.Instantiate(spawner.ValueRO.Prefab);
             
@@ -53,9 +55,8 @@ public partial struct VehicleSpawnSystem : ISystem
                 vehicle,
                 data);
         }
-
-        spawner.ValueRW.Count = 0;
-          
+        spawner.ValueRW.RemainCount -= spawnCount;
+        spawner.ValueRW.TotalCount += spawnCount;
     }
 
 }

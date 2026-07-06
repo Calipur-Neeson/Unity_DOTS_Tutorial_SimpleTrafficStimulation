@@ -14,7 +14,8 @@ class SpawnerBaker : Baker<VehicleSpawnerAuthoring>
         var entity = GetEntity(TransformUsageFlags.None);
         AddComponent(entity, new Spawner
         {
-            Prefab = GetEntity(authoring.Prefab, TransformUsageFlags.Dynamic)
+            Prefab = GetEntity(authoring.Prefab, TransformUsageFlags.Dynamic),
+            SpawnPerFrame = 10
         });
         
     }
@@ -22,5 +23,7 @@ class SpawnerBaker : Baker<VehicleSpawnerAuthoring>
 public struct Spawner : IComponentData
 {
     public Entity Prefab;
-    public int Count;
+    public int TotalCount;
+    public int RemainCount;
+    public int SpawnPerFrame;
 }
