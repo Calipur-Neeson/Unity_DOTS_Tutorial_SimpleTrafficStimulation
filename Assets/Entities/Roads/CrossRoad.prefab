@@ -122,6 +122,7 @@ MonoBehaviour:
   - {fileID: 7753723020002310936}
   - {fileID: 4342693347461627260}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 0}
 --- !u!1 &355686355547040401
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +767,7 @@ MonoBehaviour:
   - {fileID: 8270991950684588387}
   - {fileID: 2490298301652087999}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 0}
 --- !u!1 &1520121037451000539
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +880,7 @@ MonoBehaviour:
   - {fileID: 6191783807472380841}
   - {fileID: 7333488563217207948}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 3273932914331946608}
 --- !u!1 &1921412721964083141
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +941,7 @@ MonoBehaviour:
   - {fileID: 2390794190906751484}
   - {fileID: 1037878021864492838}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 0}
 --- !u!1 &1941551101675406002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1151,7 @@ MonoBehaviour:
   - {fileID: 8382114380593092555}
   - {fileID: 7292367339903483287}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 3273932914331946608}
 --- !u!1 &2039769149253825756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1274,7 @@ MonoBehaviour:
   - {fileID: 1905926834212886088}
   - {fileID: 7902500239998340978}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 0}
 --- !u!1 &2059672508448065328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1499,7 @@ MonoBehaviour:
   - {fileID: 8129495390429894265}
   - {fileID: 1158403241087891961}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 2656201481896352199}
 --- !u!1 &2197014815457380318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,6 +1867,7 @@ MonoBehaviour:
   - {fileID: 7022869372640926671}
   - {fileID: 8679192443165320872}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 2656201481896352199}
 --- !u!1 &2410815860722718685
 GameObject:
   m_ObjectHideFlags: 0
@@ -2158,6 +2166,7 @@ MonoBehaviour:
   - {fileID: 7113497694729230743}
   - {fileID: 7212194981362080235}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 2156870338656477342}
 --- !u!1 &3215723543983740416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,6 +2646,7 @@ MonoBehaviour:
   - {fileID: 3459508658543081763}
   - {fileID: 1602413967405537478}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 6588024317848259886}
 --- !u!1 &4663745830953002260
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,6 +3585,7 @@ MonoBehaviour:
   - {fileID: 6066620032298908686}
   - {fileID: 2364498006459444208}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 0}
 --- !u!1 &6504505024964838980
 GameObject:
   m_ObjectHideFlags: 0
@@ -3625,6 +3636,7 @@ MonoBehaviour:
   - {fileID: 6828263221333757566}
   - {fileID: 1050864371040256321}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 2156870338656477342}
 --- !u!1 &6545138721085847673
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,6 +3759,7 @@ MonoBehaviour:
   - {fileID: 3026393067592975379}
   - {fileID: 2119006611741709291}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 0}
 --- !u!1 &6864131226122975555
 GameObject:
   m_ObjectHideFlags: 0
@@ -4173,6 +4186,7 @@ MonoBehaviour:
   - {fileID: 3913450343083204383}
   - {fileID: 8379097112410178524}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 6588024317848259886}
 --- !u!1 &7588264491924169153
 GameObject:
   m_ObjectHideFlags: 0
@@ -4569,6 +4583,7 @@ MonoBehaviour:
   - {fileID: 7144543548007877725}
   - {fileID: 8297844374280967203}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 0}
 --- !u!1 &8319945663078787963
 GameObject:
   m_ObjectHideFlags: 0
@@ -4722,6 +4737,7 @@ MonoBehaviour:
   - {fileID: 2324719299803201143}
   - {fileID: 5800828685981192853}
   NextLane: {fileID: 0}
+  TrafficLight: {fileID: 0}
 --- !u!1 &8692555392251944755
 GameObject:
   m_ObjectHideFlags: 0

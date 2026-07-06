@@ -7,4 +7,6 @@ public struct VehicleData : IComponentData
     
     public Entity CurrentLane;
     public int CurrentIndex;
+
+    public bool IsWaiting;
 }
