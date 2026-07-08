@@ -11,15 +11,16 @@ using Unity.Transforms;
                          transform, 
                          vehicle,
                          vehicleLaneData,
-                         vehicleMoveData) 
+                         vehicleMoveData,
+                         me) 
                      in SystemAPI.Query<
                          RefRW<LocalTransform>,
                          RefRO<VehicleData>, 
                          RefRW<VehicleLaneData>, 
-                         RefRW<VehicleMoveData>>())
+                         RefRW<VehicleMoveData>>().WithEntityAccess())
             {
                 Entity laneEntity = vehicleLaneData.ValueRO.CurrentLane;
-                RefRO<LaneData> laneData = SystemAPI.GetComponentRO<LaneData>(laneEntity);
+                RefRW<LaneData> laneData = SystemAPI.GetComponentRW<LaneData>(laneEntity);
                 
                 if (vehicleMoveData.ValueRO.IsWaiting)
                 {
@@ -76,8 +77,24 @@ using Unity.Transforms;
                             }
                         }
                         
+                        DynamicBuffer<VehicleBuffer> vehicles =
+                            state.EntityManager.GetBuffer<VehicleBuffer>(laneEntity);
+                        for (int i = 0; i < vehicles.Length; i++)
+                        {
+                            if (vehicles[i].VehicleInLane == me)
+                            {
+                                vehicles.RemoveAt(i);
+                                break;
+                            }
+                        }
+                        
+                        DynamicBuffer<VehicleBuffer> newVehicles =
+                            state.EntityManager.GetBuffer<VehicleBuffer>(nextLaneEntity);
+                        newVehicles.Add(new VehicleBuffer{VehicleInLane = me});
+                        
                         vehicleLaneData.ValueRW.CurrentLane = nextLaneEntity;
                         vehicleLaneData.ValueRW.CurrentIndex = 1;
+                        continue;
                     }
                 }
                 

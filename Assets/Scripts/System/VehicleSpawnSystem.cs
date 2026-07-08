@@ -25,6 +25,12 @@ public partial struct VehicleSpawnSystem : ISystem
             
             Entity vehicle = state.EntityManager.Instantiate(spawner.ValueRO.Prefab);
             
+            DynamicBuffer<VehicleBuffer> vehicleBuffer = 
+                state.EntityManager.GetBuffer<VehicleBuffer>(lane);
+            vehicleBuffer.Add(new VehicleBuffer()
+            {
+                VehicleInLane = vehicle,
+            });
             // get Waypoint
 
             DynamicBuffer<WaypointBuffer> buffer =
