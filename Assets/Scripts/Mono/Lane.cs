@@ -9,6 +9,9 @@ public class Lane : MonoBehaviour
     [Header("Next Lane")]
     public Lane NextLane;
     
+    [Header("Traffic Light")]
+    public TrafficLightAuthoring TrafficLight;
+    
     private void OnValidate()
     {
         Waypoints = new Transform[transform.childCount];
@@ -25,7 +28,12 @@ public class LaneBaker : Baker<Lane>
     {
         Entity laneEntity = GetEntity(TransformUsageFlags.None);
 
-        AddComponent<LaneData>(laneEntity);
+        var data = new LaneData();
+        if (authoring.NextLane != null)
+            data.NextLane = GetEntity(authoring.NextLane, TransformUsageFlags.None);
+        if (authoring.TrafficLight != null)
+            data.TrafficLight = GetEntity(authoring.TrafficLight, TransformUsageFlags.None);
+        AddComponent(laneEntity, data);
 
         DynamicBuffer<WaypointBuffer> buffer =
             AddBuffer<WaypointBuffer>(laneEntity);
@@ -36,19 +44,6 @@ public class LaneBaker : Baker<Lane>
             {
                 Destination = waypoint.position
             });
-        }
-
-        if (authoring.NextLane != null)
-        {
-            Entity nextLaneEntity =
-                GetEntity(authoring.NextLane,
-                    TransformUsageFlags.None);
-
-            SetComponent(laneEntity,
-                new LaneData
-                {
-                    NextLane = nextLaneEntity
-                });
         }
     }
 }

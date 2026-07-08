@@ -40686,6 +40686,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2156870338656477342, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
+      propertyPath: RedLightDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2156870338656477342, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
+      propertyPath: GreenLightDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656201481896352199, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
+      propertyPath: RedLightDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656201481896352199, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
+      propertyPath: GreenLightDuration
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2901702188434951845, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
       propertyPath: NextLane
       value: 
@@ -40698,6 +40714,14 @@ PrefabInstance:
       propertyPath: NextLane
       value: 
       objectReference: {fileID: 880347294}
+    - target: {fileID: 3273932914331946608, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
+      propertyPath: RedLightDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3273932914331946608, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
+      propertyPath: GreenLightDuration
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4309498576309327667, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
       propertyPath: NextLane
       value: 
@@ -40738,6 +40762,14 @@ PrefabInstance:
       propertyPath: 'AdjacentRoads.Array.data[3]'
       value: 
       objectReference: {fileID: 880347297}
+    - target: {fileID: 6588024317848259886, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
+      propertyPath: RedLightDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588024317848259886, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
+      propertyPath: GreenLightDuration
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6687917911246206830, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
       propertyPath: NextLane
       value: 
