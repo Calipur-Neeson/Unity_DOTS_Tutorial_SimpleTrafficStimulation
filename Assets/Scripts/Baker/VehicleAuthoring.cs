@@ -13,6 +13,9 @@ public class VehicleAuthoring : MonoBehaviour
             {
                 MoveSpeed = Random.Range(10,20),
                 RotateSpeed = 2f,
+                Acceleration = 1f,
+                Deceleration = 5f,
+                DetectDistance = 10f
             });
             AddComponent(entity, new VehicleMoveData());
             AddComponent(entity, new VehicleLaneData());
