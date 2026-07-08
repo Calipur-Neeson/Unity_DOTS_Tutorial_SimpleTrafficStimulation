@@ -82,15 +82,33 @@ using UnityEngine;
                     }
                 }
                 
-                float3 direction = math.normalize(targetPos - currentPos);
-                quaternion q = quaternion.LookRotationSafe(direction, math.up());
+                // Move logic
+                float3 delta = targetPos - currentPos;
+                if (math.lengthsq(delta) > 0.0001f)
+                {
+                    float3 direction = math.normalize(delta);
 
-                transform.ValueRW.Position += 
-                    direction * vehicle.ValueRO.MoveSpeed * deltaTime;
-                transform.ValueRW.Rotation = Quaternion.Lerp(
-                        transform.ValueRW.Rotation,
-                        q,
-                        vehicle.ValueRO.RotateSpeed * deltaTime);
+                    quaternion targetRotation =
+                        quaternion.LookRotationSafe(direction, math.up());
+
+                    transform.ValueRW.Rotation =
+                        math.slerp(
+                            transform.ValueRO.Rotation,
+                            targetRotation,
+                            vehicle.ValueRO.RotateSpeed * deltaTime);
+                    
+                    float moveDistance = vehicleMoveData.ValueRO.CurrentMoveSpeed * deltaTime;
+                    float remainDistance = math.length(delta);
+
+                    if (moveDistance >= remainDistance)
+                    {
+                        transform.ValueRW.Position = targetPos;
+                    }
+                    else
+                    {
+                        transform.ValueRW.Position += direction * moveDistance;
+                    }
+                }
             }
         }
     }
