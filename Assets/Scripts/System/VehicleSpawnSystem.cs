@@ -44,8 +44,8 @@ public partial struct VehicleSpawnSystem : ISystem
             
             // inital Vehicle
 
-            VehicleData data =
-                state.EntityManager.GetComponentData<VehicleData>(
+            VehicleLaneData data =
+                state.EntityManager.GetComponentData<VehicleLaneData>(
                     vehicle);
 
             data.CurrentLane = lane;

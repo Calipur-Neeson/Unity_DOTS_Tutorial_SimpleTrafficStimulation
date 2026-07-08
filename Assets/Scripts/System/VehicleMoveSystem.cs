@@ -10,15 +10,19 @@ using UnityEngine;
             var deltaTime = SystemAPI.Time.DeltaTime;
             foreach (var (
                          transform, 
-                         vehicle) 
+                         vehicle,
+                         vehicleLaneData,
+                         vehicleMoveData) 
                      in SystemAPI.Query<
                          RefRW<LocalTransform>,
-                         RefRW<VehicleData>>())
+                         RefRO<VehicleData>, 
+                         RefRW<VehicleLaneData>, 
+                         RefRW<VehicleMoveData>>())
             {
-                Entity laneEntity = vehicle.ValueRO.CurrentLane;
+                Entity laneEntity = vehicleLaneData.ValueRO.CurrentLane;
                 RefRO<LaneData> laneData = SystemAPI.GetComponentRO<LaneData>(laneEntity);
                 
-                if (vehicle.ValueRO.IsWaiting)
+                if (vehicleMoveData.ValueRO.IsWaiting)
                 {
                     Entity nextLaneEntity = laneData.ValueRO.NextLane;
                     RefRO<LaneData> nextLaneData = SystemAPI.GetComponentRO<LaneData>(nextLaneEntity);
@@ -31,9 +35,9 @@ using UnityEngine;
                         
                         if (light.ValueRO.Type == TrafficLightType.Green)
                         {
-                            vehicle.ValueRW.IsWaiting = false;
-                            vehicle.ValueRW.CurrentLane = nextLaneEntity;
-                            vehicle.ValueRW.CurrentIndex = 1;
+                            vehicleMoveData.ValueRW.IsWaiting = false;
+                            vehicleLaneData.ValueRW.CurrentLane = nextLaneEntity;
+                            vehicleLaneData.ValueRW.CurrentIndex = 1;
                         }
                         continue;
                     }
@@ -42,15 +46,15 @@ using UnityEngine;
                 DynamicBuffer<WaypointBuffer> waypoints =
                     SystemAPI.GetBuffer<WaypointBuffer>(laneEntity);
                     
-                float3 targetPos = waypoints[vehicle.ValueRO.CurrentIndex].Destination;
+                float3 targetPos = waypoints[vehicleLaneData.ValueRO.CurrentIndex].Destination;
                 float3 currentPos = transform.ValueRO.Position;
                 
                 if (math.distance(currentPos, targetPos) < 0.1f)
                 {
-                    int nextIndx = vehicle.ValueRW.CurrentIndex + 1;
+                    int nextIndx = vehicleLaneData.ValueRW.CurrentIndex + 1;
                     if (nextIndx < waypoints.Length)
                     {
-                        vehicle.ValueRW.CurrentIndex = nextIndx;
+                        vehicleLaneData.ValueRW.CurrentIndex = nextIndx;
                     }
                     else
                     {
@@ -68,13 +72,13 @@ using UnityEngine;
 
                             if (light.ValueRO.Type == TrafficLightType.Red)
                             {
-                                vehicle.ValueRW.IsWaiting = true;
+                                vehicleMoveData.ValueRW.IsWaiting = true;
                                 continue;
                             }
                         }
                         
-                        vehicle.ValueRW.CurrentLane = nextLaneEntity;
-                        vehicle.ValueRW.CurrentIndex = 1;
+                        vehicleLaneData.ValueRW.CurrentLane = nextLaneEntity;
+                        vehicleLaneData.ValueRW.CurrentIndex = 1;
                     }
                 }
                 
