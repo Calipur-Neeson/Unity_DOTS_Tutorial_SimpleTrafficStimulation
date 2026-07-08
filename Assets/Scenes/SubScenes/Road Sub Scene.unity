@@ -12920,6 +12920,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2156870338656477342, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
+      propertyPath: RedLightDuration
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2901702188434951845, guid: 02ae1c723c5744345815d4e36fb403b2, type: 3}
       propertyPath: NextLane
       value: 
