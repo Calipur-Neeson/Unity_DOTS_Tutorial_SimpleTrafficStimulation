@@ -13,11 +13,11 @@ public class VehicleAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new VehicleData
             {
-                MoveSpeed = speed,
+                MaxSpeed = speed,
                 RotateSpeed = 2f,
                 Acceleration = 5f,
                 Deceleration = 40f,
-                DetectDistance = 5f
+                DetectDistanceSq = 25f
             });
             AddComponent(entity, new VehicleMoveData
             {

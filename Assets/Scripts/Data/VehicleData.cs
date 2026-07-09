@@ -2,11 +2,11 @@ using Unity.Entities;
 
 public struct VehicleData : IComponentData
 {
-    public float MoveSpeed;
+    public float MaxSpeed;
     public float RotateSpeed;
     public float Acceleration;
     public float Deceleration;
-    public float DetectDistance;
+    public float DetectDistanceSq;
 }
 
 public struct VehicleLaneData : IComponentData
