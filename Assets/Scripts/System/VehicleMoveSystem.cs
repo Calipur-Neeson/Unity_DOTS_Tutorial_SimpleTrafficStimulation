@@ -1,7 +1,6 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
     public partial struct VehicleMoveSystem: ISystem
     {
@@ -10,15 +9,20 @@ using UnityEngine;
             var deltaTime = SystemAPI.Time.DeltaTime;
             foreach (var (
                          transform, 
-                         vehicle) 
+                         vehicle,
+                         vehicleLaneData,
+                         vehicleMoveData,
+                         me) 
                      in SystemAPI.Query<
                          RefRW<LocalTransform>,
-                         RefRW<VehicleData>>())
+                         RefRO<VehicleData>, 
+                         RefRW<VehicleLaneData>, 
+                         RefRW<VehicleMoveData>>().WithEntityAccess())
             {
-                Entity laneEntity = vehicle.ValueRO.CurrentLane;
-                RefRO<LaneData> laneData = SystemAPI.GetComponentRO<LaneData>(laneEntity);
+                Entity laneEntity = vehicleLaneData.ValueRO.CurrentLane;
+                RefRW<LaneData> laneData = SystemAPI.GetComponentRW<LaneData>(laneEntity);
                 
-                if (vehicle.ValueRO.IsWaiting)
+                if (vehicleMoveData.ValueRO.IsWaiting)
                 {
                     Entity nextLaneEntity = laneData.ValueRO.NextLane;
                     RefRO<LaneData> nextLaneData = SystemAPI.GetComponentRO<LaneData>(nextLaneEntity);
@@ -31,9 +35,9 @@ using UnityEngine;
                         
                         if (light.ValueRO.Type == TrafficLightType.Green)
                         {
-                            vehicle.ValueRW.IsWaiting = false;
-                            vehicle.ValueRW.CurrentLane = nextLaneEntity;
-                            vehicle.ValueRW.CurrentIndex = 1;
+                            vehicleMoveData.ValueRW.IsWaiting = false;
+                            vehicleLaneData.ValueRW.CurrentLane = nextLaneEntity;
+                            vehicleLaneData.ValueRW.CurrentIndex = 1;
                         }
                         continue;
                     }
@@ -42,15 +46,15 @@ using UnityEngine;
                 DynamicBuffer<WaypointBuffer> waypoints =
                     SystemAPI.GetBuffer<WaypointBuffer>(laneEntity);
                     
-                float3 targetPos = waypoints[vehicle.ValueRO.CurrentIndex].Destination;
+                float3 targetPos = waypoints[vehicleLaneData.ValueRO.CurrentIndex].Destination;
                 float3 currentPos = transform.ValueRO.Position;
                 
                 if (math.distance(currentPos, targetPos) < 0.1f)
                 {
-                    int nextIndx = vehicle.ValueRW.CurrentIndex + 1;
+                    int nextIndx = vehicleLaneData.ValueRW.CurrentIndex + 1;
                     if (nextIndx < waypoints.Length)
                     {
-                        vehicle.ValueRW.CurrentIndex = nextIndx;
+                        vehicleLaneData.ValueRW.CurrentIndex = nextIndx;
                     }
                     else
                     {
@@ -68,25 +72,59 @@ using UnityEngine;
 
                             if (light.ValueRO.Type == TrafficLightType.Red)
                             {
-                                vehicle.ValueRW.IsWaiting = true;
+                                vehicleMoveData.ValueRW.IsWaiting = true;
                                 continue;
                             }
                         }
                         
-                        vehicle.ValueRW.CurrentLane = nextLaneEntity;
-                        vehicle.ValueRW.CurrentIndex = 1;
+                        DynamicBuffer<VehicleBuffer> vehicles =
+                            state.EntityManager.GetBuffer<VehicleBuffer>(laneEntity);
+                        for (int i = 0; i < vehicles.Length; i++)
+                        {
+                            if (vehicles[i].VehicleInLane == me)
+                            {
+                                vehicles.RemoveAt(i);
+                                break;
+                            }
+                        }
+                        
+                        DynamicBuffer<VehicleBuffer> newVehicles =
+                            state.EntityManager.GetBuffer<VehicleBuffer>(nextLaneEntity);
+                        newVehicles.Add(new VehicleBuffer{VehicleInLane = me});
+                        
+                        vehicleLaneData.ValueRW.CurrentLane = nextLaneEntity;
+                        vehicleLaneData.ValueRW.CurrentIndex = 1;
+                        continue;
                     }
                 }
                 
-                float3 direction = math.normalize(targetPos - currentPos);
-                quaternion q = quaternion.LookRotationSafe(direction, math.up());
+                // Move logic
+                float3 delta = targetPos - currentPos;
+                if (math.lengthsq(delta) > 0.0001f)
+                {
+                    float3 direction = math.normalize(delta);
 
-                transform.ValueRW.Position += 
-                    direction * vehicle.ValueRO.MoveSpeed * deltaTime;
-                transform.ValueRW.Rotation = Quaternion.Lerp(
-                        transform.ValueRW.Rotation,
-                        q,
-                        vehicle.ValueRO.RotateSpeed * deltaTime);
+                    quaternion targetRotation =
+                        quaternion.LookRotationSafe(direction, math.up());
+
+                    transform.ValueRW.Rotation =
+                        math.slerp(
+                            transform.ValueRO.Rotation,
+                            targetRotation,
+                            vehicle.ValueRO.RotateSpeed * deltaTime);
+
+                    float moveDistance = vehicleMoveData.ValueRO.CurrentMoveSpeed * deltaTime;
+                    float remainDistance = math.length(delta);
+
+                    if (moveDistance >= remainDistance)
+                    {
+                        transform.ValueRW.Position = targetPos;
+                    }
+                    else
+                    {
+                        transform.ValueRW.Position += direction * moveDistance;
+                    }
+                }
             }
         }
     }

@@ -8,13 +8,22 @@ public class VehicleAuthoring : MonoBehaviour
     {
         public override void Bake(VehicleAuthoring authoring)
         {
+            float speed = Random.Range(5, 20);
+            
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new VehicleData
             {
-                MoveSpeed = Random.Range(10,20),
+                MaxSpeed = speed,
                 RotateSpeed = 2f,
-                CurrentIndex = 1
+                Acceleration = 5f,
+                Deceleration = 40f,
+                DetectDistanceSq = 25f
             });
+            AddComponent(entity, new VehicleMoveData
+            {
+                CurrentMoveSpeed = speed,
+            });
+            AddComponent(entity, new VehicleLaneData());
         }
     }
 }

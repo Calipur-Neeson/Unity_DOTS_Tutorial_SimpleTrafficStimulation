@@ -45,5 +45,8 @@ public class LaneBaker : Baker<Lane>
                 Destination = waypoint.position
             });
         }
+        
+        DynamicBuffer<VehicleBuffer> vehicleBuffer =
+            AddBuffer<VehicleBuffer>(laneEntity);
     }
 }

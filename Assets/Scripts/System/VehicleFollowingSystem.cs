@@ -1,0 +1,58 @@
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
+
+partial struct VehicleFollowingSystem : ISystem
+{
+    public void OnUpdate(ref SystemState state)
+    {
+        var deltaTime = SystemAPI.Time.DeltaTime;
+        foreach (var (lane,
+                     entity) 
+                 in SystemAPI.Query<RefRW<LaneData>>().WithEntityAccess())
+        {
+            DynamicBuffer<VehicleBuffer> vehicles =
+                state.EntityManager.GetBuffer<VehicleBuffer>(entity);
+            
+            if (vehicles.Length < 2)
+                continue;
+            for (int i = 0; i < vehicles.Length - 1; i++)
+            {
+                Entity frontVehicle = vehicles[i].VehicleInLane;
+                Entity backVehicle  = vehicles[i + 1].VehicleInLane;
+
+                float3 frontPos =
+                    SystemAPI.GetComponentRO<LocalTransform>(frontVehicle).ValueRO.Position;
+
+                float3 backPos =
+                    SystemAPI.GetComponentRO<LocalTransform>(backVehicle).ValueRO.Position;
+
+                float distanceSq = math.lengthsq(frontPos - backPos);
+
+                RefRW<VehicleMoveData> backMove =
+                    SystemAPI.GetComponentRW<VehicleMoveData>(backVehicle);
+
+                RefRO<VehicleData> vehicleData = 
+                    SystemAPI.GetComponentRO<VehicleData>(backVehicle);
+                RefRW<VehicleMoveData> backVehicleMove = 
+                    SystemAPI.GetComponentRW<VehicleMoveData>(backVehicle);
+                
+                if (distanceSq < vehicleData.ValueRO.DetectDistanceSq)
+                {
+                    backVehicleMove.ValueRW.CurrentMoveSpeed -=
+                        vehicleData.ValueRO.Deceleration * deltaTime;
+                }
+                else
+                {
+                    backVehicleMove.ValueRW.CurrentMoveSpeed +=
+                        vehicleData.ValueRO.Acceleration * deltaTime;
+                }
+
+                backMove.ValueRW.CurrentMoveSpeed = math.clamp(backMove.ValueRW.CurrentMoveSpeed,
+                    0,
+                    vehicleData.ValueRO.MaxSpeed);
+            }
+        }
+    }
+    
+}
