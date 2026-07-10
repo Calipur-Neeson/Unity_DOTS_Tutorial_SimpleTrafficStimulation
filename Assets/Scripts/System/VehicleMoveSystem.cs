@@ -1,12 +1,13 @@
-﻿using Unity.Entities;
+﻿using Unity.Burst;
+using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
     public partial struct VehicleMoveSystem: ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var deltaTime = SystemAPI.Time.DeltaTime;
             foreach (var (
                          transform, 
                          vehicle,
@@ -45,8 +46,9 @@ using Unity.Transforms;
                 
                 DynamicBuffer<WaypointBuffer> waypoints =
                     SystemAPI.GetBuffer<WaypointBuffer>(laneEntity);
-                    
-                float3 targetPos = waypoints[vehicleLaneData.ValueRO.CurrentIndex].Destination;
+
+                vehicleMoveData.ValueRW.TargetPosition = waypoints[vehicleLaneData.ValueRO.CurrentIndex].Destination;
+                float3 targetPos = vehicleMoveData.ValueRO.TargetPosition;
                 float3 currentPos = transform.ValueRO.Position;
                 
                 if (math.distance(currentPos, targetPos) < 0.1f)
@@ -99,32 +101,37 @@ using Unity.Transforms;
                 }
                 
                 // Move logic
-                float3 delta = targetPos - currentPos;
-                if (math.lengthsq(delta) > 0.0001f)
-                {
-                    float3 direction = math.normalize(delta);
-
-                    quaternion targetRotation =
-                        quaternion.LookRotationSafe(direction, math.up());
-
-                    transform.ValueRW.Rotation =
-                        math.slerp(
-                            transform.ValueRO.Rotation,
-                            targetRotation,
-                            vehicle.ValueRO.RotateSpeed * deltaTime);
-
-                    float moveDistance = vehicleMoveData.ValueRO.CurrentMoveSpeed * deltaTime;
-                    float remainDistance = math.length(delta);
-
-                    if (moveDistance >= remainDistance)
-                    {
-                        transform.ValueRW.Position = targetPos;
-                    }
-                    else
-                    {
-                        transform.ValueRW.Position += direction * moveDistance;
-                    }
-                }
+                // float3 delta = targetPos - currentPos;
+                // if (math.lengthsq(delta) > 0.0001f)
+                // {
+                //     float3 direction = math.normalize(delta);
+                //
+                //     quaternion targetRotation =
+                //         quaternion.LookRotationSafe(direction, math.up());
+                //
+                //     transform.ValueRW.Rotation =
+                //         math.slerp(
+                //             transform.ValueRO.Rotation,
+                //             targetRotation,
+                //             vehicle.ValueRO.RotateSpeed * deltaTime);
+                //
+                //     float moveDistance = vehicleMoveData.ValueRO.CurrentMoveSpeed * deltaTime;
+                //     float remainDistance = math.length(delta);
+                //
+                //     if (moveDistance >= remainDistance)
+                //     {
+                //         transform.ValueRW.Position = targetPos;
+                //     }
+                //     else
+                //     {
+                //         transform.ValueRW.Position += direction * moveDistance;
+                //     }
+                // }
             }
+            VehicleMoveJob moveJob = new VehicleMoveJob
+            {
+                DeltaTime = SystemAPI.Time.DeltaTime,
+            };
+            moveJob.ScheduleParallel();
         }
     }

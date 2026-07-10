@@ -1,4 +1,5 @@
 using Unity.Entities;
+using Unity.Mathematics;
 
 public struct VehicleData : IComponentData
 {
@@ -19,4 +20,6 @@ public struct VehicleMoveData : IComponentData
 {
     public float CurrentMoveSpeed;
     public bool IsWaiting;
+    
+    public float3 TargetPosition;
 }
