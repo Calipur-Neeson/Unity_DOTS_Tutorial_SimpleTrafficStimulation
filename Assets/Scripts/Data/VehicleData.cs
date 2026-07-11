@@ -23,3 +23,8 @@ public struct VehicleMoveData : IComponentData
     
     public float3 TargetPosition;
 }
+
+public struct VehicleFollowingData : IComponentData
+{
+    public Entity CurrentFollowing;
+}

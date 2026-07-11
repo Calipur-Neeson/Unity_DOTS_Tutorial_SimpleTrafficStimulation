@@ -13,12 +13,14 @@ using Unity.Transforms;
                          vehicle,
                          vehicleLaneData,
                          vehicleMoveData,
+                         vehicleFollowingData,
                          me) 
                      in SystemAPI.Query<
                          RefRW<LocalTransform>,
                          RefRO<VehicleData>, 
-                         RefRW<VehicleLaneData>, 
-                         RefRW<VehicleMoveData>>().WithEntityAccess())
+                         RefRW<VehicleLaneData>,
+                         RefRW<VehicleMoveData>,
+                         RefRW<VehicleFollowingData>>().WithEntityAccess())
             {
                 Entity laneEntity = vehicleLaneData.ValueRO.CurrentLane;
                 RefRW<LaneData> laneData = SystemAPI.GetComponentRW<LaneData>(laneEntity);
@@ -64,7 +66,7 @@ using Unity.Transforms;
                             continue;
                          
                         Entity nextLaneEntity = laneData.ValueRO.NextLane;
-                        RefRO<LaneData> nextLaneData = SystemAPI.GetComponentRO<LaneData>(nextLaneEntity);
+                        RefRW<LaneData> nextLaneData = SystemAPI.GetComponentRW<LaneData>(nextLaneEntity);
                     
                         if (nextLaneData.ValueRO.TrafficLight != Entity.Null)
                         {
@@ -78,21 +80,12 @@ using Unity.Transforms;
                                 continue;
                             }
                         }
-                        
-                        DynamicBuffer<VehicleBuffer> vehicles =
-                            state.EntityManager.GetBuffer<VehicleBuffer>(laneEntity);
-                        for (int i = 0; i < vehicles.Length; i++)
+
+                        if (nextLaneData.ValueRO.RecentVehicle != Entity.Null)
                         {
-                            if (vehicles[i].VehicleInLane == me)
-                            {
-                                vehicles.RemoveAt(i);
-                                break;
-                            }
+                            vehicleFollowingData.ValueRW.CurrentFollowing = nextLaneData.ValueRO.RecentVehicle;
                         }
-                        
-                        DynamicBuffer<VehicleBuffer> newVehicles =
-                            state.EntityManager.GetBuffer<VehicleBuffer>(nextLaneEntity);
-                        newVehicles.Add(new VehicleBuffer{VehicleInLane = me});
+                        nextLaneData.ValueRW.RecentVehicle = me;
                         
                         vehicleLaneData.ValueRW.CurrentLane = nextLaneEntity;
                         vehicleLaneData.ValueRW.CurrentIndex = 1;
