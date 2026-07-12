@@ -26,6 +26,12 @@ public partial struct VehicleSpawnSystem : ISystem
             Entity vehicle = state.EntityManager.Instantiate(spawner.ValueRO.Prefab);
             
             RefRW<LaneData> laneData = SystemAPI.GetComponentRW<LaneData>(lane);
+            if (laneData.ValueRO.RecentVehicle != Entity.Null)
+            {
+                RefRW<VehicleFollowingData> followingData =
+                    SystemAPI.GetComponentRW<VehicleFollowingData>(vehicle);
+                followingData.ValueRW.CurrentFollowing = laneData.ValueRO.RecentVehicle;
+            }
             laneData.ValueRW.RecentVehicle = vehicle;
             
             // get Waypoint

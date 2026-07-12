@@ -17,7 +17,7 @@ public class VehicleAuthoring : MonoBehaviour
                 RotateSpeed = 2f,
                 Acceleration = 5f,
                 Deceleration = 50f,
-                DetectDistanceSq = 36f
+                DetectDistanceSq = 20f
             });
             AddComponent(entity, new VehicleMoveData
             {
