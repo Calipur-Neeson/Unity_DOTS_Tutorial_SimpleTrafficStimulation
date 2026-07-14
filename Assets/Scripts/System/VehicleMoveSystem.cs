@@ -1,23 +1,26 @@
-﻿using Unity.Entities;
+﻿using Unity.Burst;
+using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
     public partial struct VehicleMoveSystem: ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var deltaTime = SystemAPI.Time.DeltaTime;
             foreach (var (
                          transform, 
                          vehicle,
                          vehicleLaneData,
                          vehicleMoveData,
+                         vehicleFollowingData,
                          me) 
                      in SystemAPI.Query<
                          RefRW<LocalTransform>,
                          RefRO<VehicleData>, 
-                         RefRW<VehicleLaneData>, 
-                         RefRW<VehicleMoveData>>().WithEntityAccess())
+                         RefRW<VehicleLaneData>,
+                         RefRW<VehicleMoveData>,
+                         RefRW<VehicleFollowingData>>().WithEntityAccess())
             {
                 Entity laneEntity = vehicleLaneData.ValueRO.CurrentLane;
                 RefRW<LaneData> laneData = SystemAPI.GetComponentRW<LaneData>(laneEntity);
@@ -45,8 +48,9 @@ using Unity.Transforms;
                 
                 DynamicBuffer<WaypointBuffer> waypoints =
                     SystemAPI.GetBuffer<WaypointBuffer>(laneEntity);
-                    
-                float3 targetPos = waypoints[vehicleLaneData.ValueRO.CurrentIndex].Destination;
+
+                vehicleMoveData.ValueRW.TargetPosition = waypoints[vehicleLaneData.ValueRO.CurrentIndex].Destination;
+                float3 targetPos = vehicleMoveData.ValueRO.TargetPosition;
                 float3 currentPos = transform.ValueRO.Position;
                 
                 if (math.distance(currentPos, targetPos) < 0.1f)
@@ -62,7 +66,7 @@ using Unity.Transforms;
                             continue;
                          
                         Entity nextLaneEntity = laneData.ValueRO.NextLane;
-                        RefRO<LaneData> nextLaneData = SystemAPI.GetComponentRO<LaneData>(nextLaneEntity);
+                        RefRW<LaneData> nextLaneData = SystemAPI.GetComponentRW<LaneData>(nextLaneEntity);
                     
                         if (nextLaneData.ValueRO.TrafficLight != Entity.Null)
                         {
@@ -76,21 +80,12 @@ using Unity.Transforms;
                                 continue;
                             }
                         }
-                        
-                        DynamicBuffer<VehicleBuffer> vehicles =
-                            state.EntityManager.GetBuffer<VehicleBuffer>(laneEntity);
-                        for (int i = 0; i < vehicles.Length; i++)
+
+                        if (nextLaneData.ValueRO.RecentVehicle != Entity.Null)
                         {
-                            if (vehicles[i].VehicleInLane == me)
-                            {
-                                vehicles.RemoveAt(i);
-                                break;
-                            }
+                            vehicleFollowingData.ValueRW.CurrentFollowing = nextLaneData.ValueRO.RecentVehicle;
                         }
-                        
-                        DynamicBuffer<VehicleBuffer> newVehicles =
-                            state.EntityManager.GetBuffer<VehicleBuffer>(nextLaneEntity);
-                        newVehicles.Add(new VehicleBuffer{VehicleInLane = me});
+                        nextLaneData.ValueRW.RecentVehicle = me;
                         
                         vehicleLaneData.ValueRW.CurrentLane = nextLaneEntity;
                         vehicleLaneData.ValueRW.CurrentIndex = 1;
@@ -99,32 +94,37 @@ using Unity.Transforms;
                 }
                 
                 // Move logic
-                float3 delta = targetPos - currentPos;
-                if (math.lengthsq(delta) > 0.0001f)
-                {
-                    float3 direction = math.normalize(delta);
-
-                    quaternion targetRotation =
-                        quaternion.LookRotationSafe(direction, math.up());
-
-                    transform.ValueRW.Rotation =
-                        math.slerp(
-                            transform.ValueRO.Rotation,
-                            targetRotation,
-                            vehicle.ValueRO.RotateSpeed * deltaTime);
-
-                    float moveDistance = vehicleMoveData.ValueRO.CurrentMoveSpeed * deltaTime;
-                    float remainDistance = math.length(delta);
-
-                    if (moveDistance >= remainDistance)
-                    {
-                        transform.ValueRW.Position = targetPos;
-                    }
-                    else
-                    {
-                        transform.ValueRW.Position += direction * moveDistance;
-                    }
-                }
+                // float3 delta = targetPos - currentPos;
+                // if (math.lengthsq(delta) > 0.0001f)
+                // {
+                //     float3 direction = math.normalize(delta);
+                //
+                //     quaternion targetRotation =
+                //         quaternion.LookRotationSafe(direction, math.up());
+                //
+                //     transform.ValueRW.Rotation =
+                //         math.slerp(
+                //             transform.ValueRO.Rotation,
+                //             targetRotation,
+                //             vehicle.ValueRO.RotateSpeed * deltaTime);
+                //
+                //     float moveDistance = vehicleMoveData.ValueRO.CurrentMoveSpeed * deltaTime;
+                //     float remainDistance = math.length(delta);
+                //
+                //     if (moveDistance >= remainDistance)
+                //     {
+                //         transform.ValueRW.Position = targetPos;
+                //     }
+                //     else
+                //     {
+                //         transform.ValueRW.Position += direction * moveDistance;
+                //     }
+                // }
             }
+            VehicleMoveJob moveJob = new VehicleMoveJob
+            {
+                DeltaTime = SystemAPI.Time.DeltaTime,
+            };
+            moveJob.ScheduleParallel();
         }
     }

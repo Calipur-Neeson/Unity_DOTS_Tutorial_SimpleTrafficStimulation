@@ -25,12 +25,15 @@ public partial struct VehicleSpawnSystem : ISystem
             
             Entity vehicle = state.EntityManager.Instantiate(spawner.ValueRO.Prefab);
             
-            DynamicBuffer<VehicleBuffer> vehicleBuffer = 
-                state.EntityManager.GetBuffer<VehicleBuffer>(lane);
-            vehicleBuffer.Add(new VehicleBuffer()
+            RefRW<LaneData> laneData = SystemAPI.GetComponentRW<LaneData>(lane);
+            if (laneData.ValueRO.RecentVehicle != Entity.Null)
             {
-                VehicleInLane = vehicle,
-            });
+                RefRW<VehicleFollowingData> followingData =
+                    SystemAPI.GetComponentRW<VehicleFollowingData>(vehicle);
+                followingData.ValueRW.CurrentFollowing = laneData.ValueRO.RecentVehicle;
+            }
+            laneData.ValueRW.RecentVehicle = vehicle;
+            
             // get Waypoint
 
             DynamicBuffer<WaypointBuffer> buffer =
@@ -51,8 +54,7 @@ public partial struct VehicleSpawnSystem : ISystem
             // inital Vehicle
 
             VehicleLaneData data =
-                state.EntityManager.GetComponentData<VehicleLaneData>(
-                    vehicle);
+                state.EntityManager.GetComponentData<VehicleLaneData>(vehicle);
 
             data.CurrentLane = lane;
             data.CurrentIndex = 1;
@@ -60,6 +62,7 @@ public partial struct VehicleSpawnSystem : ISystem
             state.EntityManager.SetComponentData(
                 vehicle,
                 data);
+            
         }
         spawner.ValueRW.RemainCount -= spawnCount;
         spawner.ValueRW.TotalCount += spawnCount;
