@@ -4,20 +4,25 @@ using Random = UnityEngine.Random;
 
 public class VehicleAuthoring : MonoBehaviour
 {
+    public Vector2 SpeedRange = new Vector2(5f, 20f);
+    public float RotateSpeed = 3f;
+    public float Acceleration = 20f;
+    public float Deceleration = 50f;
+    public float SafeDistanceSq = 20f;
     private class Baker : Baker<VehicleAuthoring>
     {
         public override void Bake(VehicleAuthoring authoring)
         {
-            float speed = Random.Range(5, 20);
+            float speed = Random.Range(authoring.SpeedRange.x, authoring.SpeedRange.y);
             
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new VehicleData
             {
                 MaxSpeed = speed,
-                RotateSpeed = 2f,
-                Acceleration = 5f,
-                Deceleration = 50f,
-                DetectDistanceSq = 20f
+                RotateSpeed = authoring.RotateSpeed,
+                Acceleration = authoring.Acceleration,
+                Deceleration = authoring.Deceleration,
+                DetectDistanceSq = authoring.SafeDistanceSq
             });
             AddComponent(entity, new VehicleMoveData
             {
